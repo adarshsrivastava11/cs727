@@ -16,8 +16,12 @@ console.log(compiledCode.contracts[':Voting'].interface)
 const byteCode = compiledCode.contracts[':Voting'].bytecode
 
 const VotingContract = web3.eth.contract(abiDefinition)
+var accounts = web3.eth.accounts.create();
+console.log(accounts)
 const deployedContract = VotingContract.new(['Rama','Nick','Jose'], {
   data: byteCode,
   from: web3.eth.accounts[0], gas: 4712388
 }, (err, contract) => {
+	console.log(contract.address);
 });
+//console.log(deployedContract);

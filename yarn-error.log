@@ -1,0 +1,40 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add web3
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/adarshsrivastava/.rvm/bin:/Users/adarshsrivastava/.vimpkg/bin
+
+Yarn version: 
+  1.7.0
+
+Node version: 
+  10.2.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: EACCES: permission denied, mkdir '/Users/adarshsrivastava/CS727/cs727/node_modules/ethers/node_modules/elliptic/node_modules'
+
+npm manifest: 
+  {
+    "name": "cs727",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Adarsh",
+    "license": "ISC",
+    "dependencies": {
+      "solc": "^0.4.25",
+      "web3": "^0.20.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
