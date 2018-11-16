@@ -6,19 +6,31 @@ const web3 = new Web3();
 
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
 
-const address = web3.eth.accounts[0];
+// const address = web3.eth.accounts[0];
 
-const code = fs.readFileSync('Voting.sol').toString()
-const compiledCode = solc.compile(code)
+// var code = fs.readFileSync('Voting.sol').toString()
+// var compiledCode = solc.compile(code)
+// var abiDefinition = JSON.parse(compiledCode.contracts[':Voting'].interface)
+// console.log(compiledCode.contracts[':Voting'].interface)
+// var byteCode = compiledCode.contracts[':Voting'].bytecode
 
-const abiDefinition = JSON.parse(compiledCode.contracts[':Voting'].interface)
-console.log(compiledCode.contracts[':Voting'].interface)
-const byteCode = compiledCode.contracts[':Voting'].bytecode
+// var VotingContract = web3.eth.contract(abiDefinition)
+// var deployedContract = VotingContract.new(['Rama','Nick','Jose'], {
+//   data: byteCode,
+//   from: web3.eth.accounts[0], gas: 4712388
+// }, (err, contract) => {
+// 	console.log(contract.address);
+// });
 
-const VotingContract = web3.eth.contract(abiDefinition)
-var accounts = web3.eth.accounts.create();
-console.log(accounts)
-const deployedContract = VotingContract.new(['Rama','Nick','Jose'], {
+var code = fs.readFileSync('UserManagement.sol').toString()
+var compiledCode = solc.compile(code)
+console.log(compiledCode);
+var abiDefinition = JSON.parse(compiledCode.contracts[':UserManagement'].interface)
+console.log(compiledCode.contracts[':UserManagement'].interface)
+var byteCode = compiledCode.contracts[':UserManagement'].bytecode
+
+var VotingContract = web3.eth.contract(abiDefinition)
+var deployedContract = VotingContract.new({
   data: byteCode,
   from: web3.eth.accounts[0], gas: 4712388
 }, (err, contract) => {
