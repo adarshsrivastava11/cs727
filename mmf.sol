@@ -15,16 +15,17 @@ contract Crowdfunding {
         mFundCompany = _mFundCompany;
         minInvestAmount = _minInvestAmount;
         investDate = _investDate;
-        invest(msg.value);
+        //invest(msg.value);
     }
-    function invest(uint256 amount) public payable {
-        require(now < investDate);                // in the fundraising period
+    function invest(uint256 amount) public payable returns (bool) {
+        // require(now < investDate);                // in the fundraising period
         require(msg.value == amount);
         totalInvestment += amount;
         investorList.push(msg.sender);
         investAmount[msg.sender] += amount;
+        return true;
     }
-    function retToInvestors(uint256 amount) public payable{
+    function returnToInvestors(uint256 amount) public payable{
         uint totalReturn = address(this).balance;
         uint userShare;
         uint numInvestors = investorList.length;
