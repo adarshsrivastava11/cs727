@@ -31,7 +31,11 @@ contract Crowdfunding {
         company.transfer(amountSent);
         return amountSent;
     }
-    function returnToInvestors(uint256 amount) public payable{
+    function getBalance() public returns(uint){
+        return address(this).balance;
+    }
+    function returnToInvestors(uint amount) public payable returns(uint){
+        require(msg.value == amount);
         uint totalReturn = address(this).balance;
         uint userShare;
         address user;
@@ -40,5 +44,6 @@ contract Crowdfunding {
             userShare = (totalReturn*investAmount[user])/totalInvestment;
             address(user).transfer(userShare);
         }
+        return totalReturn;
     }
 }
