@@ -1,8 +1,9 @@
 web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"investAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"investorList","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"invest","outputs":[{"name":"","type":"bool"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"returnToInvestors","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"inputs":[{"name":"_mFundCompany","type":"address"},{"name":"_minInvestAmount","type":"uint256"},{"name":"_investDate","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
+abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"investAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"investorList","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"invest","outputs":[{"name":"","type":"bool"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"returnToInvestors","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"sendToCompany","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_company","type":"address"},{"name":"_minInvestAmount","type":"uint256"},{"name":"_investDate","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
+
 VotingContract = web3.eth.contract(abi);
 // In your nodejs console, execute contractInstance.address to get the address at which the contract is deployed and change the line below to use your deployed address
-contractInstance = VotingContract.at('0xf3c30debf4269507d04768f365e3549dcf0d1047');
+contractInstance = VotingContract.at('0x1d79019ad12de9b5e05a7d46c237b653b8b574c8');
 // function voteForCandidate(candidate) {
 //   candidateName = $("#candidate").val();
 //   try {
@@ -39,12 +40,24 @@ contractInstance = VotingContract.at('0xf3c30debf4269507d04768f365e3549dcf0d1047
 
 
 $(document).ready(function() {
-  console.log(web3.eth.accounts[1]);
+  var check= contractInstance.invest.call(10, {value:10, from: web3.eth.accounts[1],gas:3000000});
+  console.log(check);
+  var check= contractInstance.invest.call(10, {value:10, from: web3.eth.accounts[2],gas:3000000});
+  console.log(check);
+  var check= contractInstance.invest.call(10, {value:10, from: web3.eth.accounts[3],gas:3000000});
+  console.log(check);
+  var balance =  web3.eth.getBalance(web3.eth.accounts[1]);
+  balance = web3.toDecimal(balance);
+  console.log(balance);
+  var balance =  web3.eth.getBalance(web3.eth.accounts[2]);
+  balance = web3.toDecimal(balance);
+  console.log(balance);
   var balance =  web3.eth.getBalance(web3.eth.accounts[3]);
   balance = web3.toDecimal(balance);
   console.log(balance);
-  var lund= contractInstance.invest.call(1, {value:1, from: web3.eth.accounts[4],gas:3000000});
-  console.log(lund);
+  var check= contractInstance.sendToCompany.call({from:web3.eth.accounts[1]});
+  check = web3.toDecimal(check);
+  console.log(check);
   // contractInstance.addCandidate("Adarsh", "addy", "hello", "adarsh", web3.eth.accounts[3], {from: web3.eth.accounts[3]}, function() {
   //     console.log("Added");
   //   });
