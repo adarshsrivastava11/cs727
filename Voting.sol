@@ -1,47 +1,39 @@
 pragma solidity ^0.4.25;
 // We have to specify what version of compiler this code will compile with
-contract MicroMutualFund {
-  /* mapping field below is equivalent to an associative array or hash.
-  The key of the mapping is candidate name stored as type bytes32 and value is
-  an unsigned integer to store the vote count
-  */
-  mapping (bytes32 => uint8) public votesReceived;
-  mapping (address => uint256) public amountInvested;
-  /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
-  We will use an array of bytes32 instead to store the list of candidates
-  */
-  bytes32[] public candidateList;
-  /* This is the constructor which will be called once when you
-  deploy the contract to the blockchain. When we deploy the contract,
-  we will pass an array of candidates who will be contesting in the election
-  */
-  function Voting(bytes32[] candidateNames) public {
-    candidateList = candidateNames;
+contract Voting {
+  struct User {
+    bytes32 name;
+    bytes32 username;
+    bytes32 password;
+    bytes32 email;
   }
-  function addCandidate(bytes32 nameOfCandidate) public {
-    //log0(bytes32("Hello"));
-    candidateList.push(nameOfCandidate);
+
+  mapping (address => User) public userAccountMap;
+  mapping (bytes32 => address) public emailAccountMap;
+
+  address[] public userAccounts;
+
+  function Voting(address[] miscAccounts) public {
+    userAccounts = miscAccounts;
   }
-  // This function returns the total votes a candidate has received so far
-  function totalVotesFor(bytes32 candidate) view public returns (uint8) {
-    require(validCandidate(candidate));
-    return votesReceived[candidate];
+
+  function addUser(address miscAddress, bytes32 _email) public {
+    var user = userAccountMap[miscAddress];
+    // user.name = _name;
+    // user.username = _username;
+    // user.password = _password;
+    user. email = _email;
+    userAccounts.push(miscAddress);
   }
-  function totalCandidates() view public returns (bytes32[]) {
-    return candidateList;
+
+  function isUser(bytes32 email, bytes32 userPass) view public returns (bytes32) {
+    address userAddress = emailAccountMap[email];
+    var user = userAccountMap[userAddress];
+    bytes32 password = user.password;
+    return password;
+
   }
-  // This function increments the vote count for the specified candidate. This
-  // is equivalent to casting a vote
-  function voteForCandidate(bytes32 candidate) public {
-    require(validCandidate(candidate));
-    votesReceived[candidate] += 1;
-  }
-  function validCandidate(bytes32 candidate) view public returns (bool) {
-    for(uint i = 0; i < candidateList.length; i++) {
-      if (candidateList[i] == candidate) {
-        return true;
-      }
-    }
-    return false;
+  function totalUsers() view public returns (address[]) {
+    return userAccounts;
   }
 }
