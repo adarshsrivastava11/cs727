@@ -1,6 +1,6 @@
 pragma solidity^0.4.18;
 
-contract Crowdfunding {
+contract Mmf {
     address creator;
     address company;
     uint totalInvestment;
@@ -10,7 +10,7 @@ contract Crowdfunding {
     mapping(address => uint256) public investAmount;
     address[] public investorList;
 
-    function Crowdfunding(address _company, uint256 _minInvestAmount, uint256 _investDate) public {
+    function Mmf(address _company, uint256 _minInvestAmount, uint256 _investDate) public {
         creator = msg.sender;
         company = _company;
         minInvestAmount = _minInvestAmount;
@@ -35,6 +35,7 @@ contract Crowdfunding {
         return address(this).balance;
     }
     function returnToInvestors(uint amount) public payable returns(uint){
+        require(msg.sender == company);
         require(msg.value == amount);
         uint totalReturn = address(this).balance;
         uint userShare;

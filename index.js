@@ -59,6 +59,7 @@ function isUser() {
 
 
 $(document).ready(function() {
+  console.log(web3.eth.accounts[0]);
   // var accounts = web3.personal.newAccount("hello");
   // console.log(accounts);
   // var balance =  web3.eth.getBalance(web3.eth.accounts[1]);
