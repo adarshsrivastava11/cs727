@@ -11,20 +11,21 @@ contract UserManagement {
   mapping (address => User) public userAccountMap;
   address[] public userAccounts;
 
-  function UserManagement() public {
+  function UserManagement(address[] miscAddress) public {
+    userAccounts = miscAddress;
   }
 
-  function addCandidate(bytes32 _name, bytes32 _username, bytes32 _password, bytes32 _email, address accountAddress) public returns (address) {
-    var user = userAccountMap[accountAddress];
-    user.name = _name;
-    user.username = _username;
-    user.password = _password;
-    user. email = _email;
+  function addCandidate(address accountAddress) public returns (address[]) {
     userAccounts.push(accountAddress);
-    return accountAddress;
+    // var user = userAccountMap[accountAddress];
+    // user.name = _name;
+    // user.username = _username;
+    // user.password = _password;
+    // user. email = _email;
+    return userAccounts;
   }
 
-  function getUsers() public returns(address[]) {
+  function getUsers() view public returns(address[]) {
     return userAccounts;
   }
     

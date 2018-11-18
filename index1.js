@@ -1,9 +1,18 @@
 web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"investAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"investorList","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"invest","outputs":[{"name":"","type":"bool"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"returnToInvestors","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"sendToCompany","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_company","type":"address"},{"name":"_minInvestAmount","type":"uint256"},{"name":"_investDate","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
 
-VotingContract = web3.eth.contract(abi);
-// In your nodejs console, execute contractInstance.address to get the address at which the contract is deployed and change the line below to use your deployed address
-contractInstance = VotingContract.at('0x1d79019ad12de9b5e05a7d46c237b653b8b574c8');
+xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    JSONResponse = JSON.parse(this.responseText);
+    interface = JSONResponse.interface;
+    address = JSONResponse.address;
+    abi = JSON.parse(interface);
+    VotingContract = web3.eth.contract(abi);
+    contractInstance = VotingContract.at(address);
+  }
+};
+xhttp.open("GET", "http://localhost:8081", true);
+xhttp.send();
 // function voteForCandidate(candidate) {
 //   candidateName = $("#candidate").val();
 //   try {
