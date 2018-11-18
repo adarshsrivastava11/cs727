@@ -30,8 +30,8 @@ function voteForCandidate(candidate) {
 
 function addUser(candidate) {
   try {
-    contractInstance.addUser(web3.eth.accounts[4], "adarshkumar11@gmail.com", {from: web3.eth.accounts[0]}, function() {
-    });
+    var logger = contractInstance.addUser(web3.eth.accounts[6], "adarsh", "bye", {from: web3.eth.accounts[0], gas: 300000});
+    console.log(logger);
   } catch (err) {
     console.log(err)
   }
@@ -43,6 +43,15 @@ function totalUsers() {
    list_people.forEach(function(item){
       console.log(item);
    });
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+function isUser() {
+  try {
+   var user_pass = contractInstance.isUser("adarsh", "bye");
+   console.log(web3.toAscii(user_pass));
   } catch (err) {
     console.log(err)
   }

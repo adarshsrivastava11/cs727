@@ -9,7 +9,7 @@ contract Voting {
   }
 
   mapping (address => User) public userAccountMap;
-  mapping (bytes32 => address) public emailAccountMap;
+  mapping (bytes32 => address) public usernameAccountMap;
 
   address[] public userAccounts;
 
@@ -17,22 +17,24 @@ contract Voting {
     userAccounts = miscAccounts;
   }
 
-  function addUser(address miscAddress, bytes32 _email) public {
+  function addUser(address miscAddress, bytes32 userName, bytes32 userPassword) public {
     var user = userAccountMap[miscAddress];
+    usernameAccountMap[userName] = miscAddress;
     // user.name = _name;
-    // user.username = _username;
-    // user.password = _password;
-    user. email = _email;
+    user.username = userName;
+    user.password = userPassword;
+    // user. email = _email;
     userAccounts.push(miscAddress);
   }
 
-  function isUser(bytes32 email, bytes32 userPass) view public returns (bytes32) {
-    address userAddress = emailAccountMap[email];
+  function isUser(bytes32 username, bytes32 userPass) view public returns (bytes32) {
+    address userAddress = usernameAccountMap[username];
     var user = userAccountMap[userAddress];
     bytes32 password = user.password;
     return password;
 
   }
+  
   function totalUsers() view public returns (address[]) {
     return userAccounts;
   }
