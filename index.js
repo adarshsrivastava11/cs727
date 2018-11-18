@@ -50,7 +50,7 @@ function totalUsers() {
 
 function isUser() {
   try {
-   var user_pass = contractInstance.isUser("adarsh", "bye");
+   var user_pass = contractInstance.isUser("adarsh");
    console.log(web3.toAscii(user_pass));
   } catch (err) {
     console.log(err)
