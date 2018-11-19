@@ -21,7 +21,9 @@ contract Mmf {
         // require(now < investDate);                // in the fundraising period
         require(msg.value == amount);
         totalInvestment += amount;
-        investorList.push(msg.sender);
+        if(investAmount[msg.sender] == 0){
+            investorList.push(msg.sender);
+        }
         investAmount[msg.sender] += amount;
         return true;
     }
