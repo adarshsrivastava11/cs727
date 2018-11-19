@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>List Of Comapnies</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+
+<script>
+  function companyA(){
+    localStorage.setItem("company_id", "7");
+    window.location = "company_contract.html";
+  }
+  function companyB(){
+    localStorage.setItem("company_id", "8");
+    window.location = "company_contract.html";
+  }
+  function companyC(){
+    localStorage.setItem("company_id", "9");
+    window.location = "company_contract.html";
+  }
+</script>
+</head>
+<body class="container">
+  <h2>List of Companies - </h2>
+  <a href="#" onclick="companyA()" class="btn btn-primary">Company A</a>
+  <a href="#" onclick="companyB()" class="btn btn-danger">Company B</a>
+  <a href="#" onclick="companyC()" class="btn btn-success">Company C</a>
+</body>
+<!-- <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script> -->
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+</html>

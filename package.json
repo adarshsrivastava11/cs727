@@ -9,6 +9,9 @@
   "author": "Adarsh",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.16.4",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.3.12",
     "solc": "^0.4.25",
     "web3": "^0.20.2"
   }
